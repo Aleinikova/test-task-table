@@ -16,62 +16,12 @@ import TableBody from '@/components/TableBody';
 import TableFoot from '@/components/TableFoot';
 import RequestStatus from '@/components/RequestStatus';
 import Button from '@/components/Button';
-
 import Loader from '@/components/Loader';
 
-type Request = {
-  id: string;
-  item: string;
-  createdAt: string;
-  status: 'draft' | 'pending' | 'complete';
-};
+import { Order } from '@/types/order';
+import ORDERS from '../data';
 
-const columnHelper = createColumnHelper<Request>();
-
-const defaultData: Request[] = [
-  {
-    id: '343901',
-    item: 'Air Jordan 3 Travis Scott',
-    createdAt: '2023-12-06T11:39:24+00:00',
-    status: 'draft',
-  },
-  {
-    id: '934030',
-    item: 'Air Jordan 3 Travis Scott',
-    createdAt: '2023-12-06T11:39:24+00:00',
-    status: 'complete',
-  },
-  {
-    id: '934031',
-    item: 'Air Jordan 3 Travis Scott',
-    createdAt: '2023-12-06T11:39:24+00:00',
-    status: 'pending',
-  },
-  {
-    id: '934032',
-    item: 'Air Jordan 3 Travis Scott',
-    createdAt: '2023-12-06T11:39:24+00:00',
-    status: 'draft',
-  },
-  {
-    id: '934033',
-    item: 'Air Jordan 3 Travis Scott',
-    createdAt: '2023-12-06T11:39:24+00:00',
-    status: 'draft',
-  },
-  {
-    id: '934034',
-    item: 'Air Jordan 3 Travis Scott',
-    createdAt: '2023-12-06T11:39:24+00:00',
-    status: 'draft',
-  },
-  {
-    id: '934035',
-    item: 'Air Jordan 3 Travis Scott',
-    createdAt: '2023-12-06T11:39:24+00:00',
-    status: 'draft',
-  },
-];
+const columnHelper = createColumnHelper<Order>();
 
 const columns = [
   columnHelper.accessor('id', {
@@ -105,8 +55,11 @@ const columns = [
 function Home() {
   const query = useQuery({
     queryKey: ['requests'],
-    queryFn: () => Promise.resolve(defaultData),
+    queryFn: () => Promise.resolve(ORDERS as Order[]),
   });
+
+  // TODO: use from backend when pagination will be implemented
+  const totalDataSize = ORDERS.length;
 
   const table = useReactTable({
     data: query.data || [],
@@ -128,7 +81,7 @@ function Home() {
 
   const lastElementIndex = Math.min(
     firstElementIndex + table.getState().pagination.pageSize,
-    table.getRowModel().rows.length
+    totalDataSize
   );
 
   return (
@@ -183,9 +136,9 @@ function Home() {
             <TableRow>
               <TableCell colSpan={4} variant='foot'>
                 <div className='flex items-center'>
-                  <span>{`Viewing ${firstElementIndex}-${lastElementIndex} of ${
-                    table.getRowModel().rows.length
-                  } results`}</span>
+                  <span>
+                    {`Viewing ${firstElementIndex}-${lastElementIndex} of ${totalDataSize} results`}
+                  </span>
 
                   <div className='ml-auto'>
                     <Button className='mr-1' size='xs' disabled>

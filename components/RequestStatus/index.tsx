@@ -4,6 +4,7 @@ import ProgressIcon from '../Icons/ProgressIcon';
 
 interface RequestStatusProps {
   variant: 'pending' | 'complete' | 'draft';
+  className?: string;
 }
 
 const variants = {
@@ -24,15 +25,21 @@ const variants = {
   },
 };
 
-const RequestStatus = ({ variant }: RequestStatusProps) => {
+const RequestStatus = ({
+  variant,
+  className,
+  ...otherProps
+}: RequestStatusProps) => {
   const Icon = variants[variant].Icon;
 
   return (
     <div
       className={clsx(
-        'py-0.75 inline-flex w-auto items-center rounded border px-1',
-        variants[variant].style
+        'inline-flex w-auto items-center rounded border px-1 py-0.75',
+        variants[variant].style,
+        className
       )}
+      {...otherProps}
     >
       <span className={clsx('mr-1 text-xs leading-3')}>
         {variants[variant].label}

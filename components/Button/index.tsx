@@ -9,14 +9,9 @@ interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
 }
 
 const variants = {
-  default: {
-    active: 'border border-primary rounded-md text-primary font-semibold',
-    disabled: 'disabled:opacity-50',
-  },
-  primary: {
-    active: '',
-    disabled: '',
-  },
+  default:
+    'border border-primary rounded-md text-primary font-semibold bg-white enabled:hover:bg-gray-100',
+  primary: '',
 };
 
 const sizes = {
@@ -32,7 +27,7 @@ const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(function Button(
     <button
       className={clsx(
         'disabled:opacity-50',
-        variants[variant].active,
+        variants[variant],
         sizes[size],
         className
       )}
