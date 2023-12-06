@@ -20,7 +20,7 @@ const variants = {
 };
 
 const sizes = {
-  xs: 'py-1.5 px-2',
+  xs: 'py-1.25 px-2 leading-tight',
   sm: 'p-2',
 };
 

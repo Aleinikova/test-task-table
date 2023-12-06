@@ -15,7 +15,7 @@ interface TableCellProps extends TableCellBaseProps {
 
 const styles = {
   head: 'text-primary font-semibold text-xs border-t border-t-head',
-  body: 'text-secondary text-sm',
+  body: 'text-secondary text-sm leading-none',
   foot: 'text-xs text-secondary font-medium',
 };
 
@@ -33,7 +33,7 @@ const TableCell = ({
     component,
     {
       className: clsx(
-        'border-table border-b px-1.5 py-2 text-left',
+        'border-table border-b p-1.5 text-left min-h-[32px]',
         styles[variant],
         className
       ),

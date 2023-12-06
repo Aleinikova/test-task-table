@@ -8,6 +8,10 @@ const config: Config = {
   ],
   theme: {
     extend: {
+      padding: {
+        '0.75': '3px',
+        '1.25': '5px',
+      },
       backgroundImage: {
         'gradient-radial': 'radial-gradient(var(--tw-gradient-stops))',
         'gradient-conic':
@@ -17,6 +21,9 @@ const config: Config = {
         table: '#ECEEF1',
         head: '#D9DEE3',
         primary: '#CBCFD6',
+      },
+      borderWidth: {
+        3: '3px',
       },
       colors: {
         primary: '#363A43',

@@ -30,14 +30,14 @@ const RequestStatus = ({ variant }: RequestStatusProps) => {
   return (
     <div
       className={clsx(
-        'inline-flex w-auto items-center rounded border p-1',
+        'py-0.75 inline-flex w-auto items-center rounded border px-1',
         variants[variant].style
       )}
     >
       <span className={clsx('mr-1 text-xs leading-3')}>
         {variants[variant].label}
       </span>
-      <Icon className={clsx('h-3.5 w-3.5')} />
+      <Icon className={clsx('h-3 w-3.5')} />
     </div>
   );
 };
