@@ -4,9 +4,9 @@ import clsx from 'clsx';
 export type TableCellBaseProps = React.ThHTMLAttributes<HTMLTableCellElement> &
   React.TdHTMLAttributes<HTMLTableCellElement>;
 
-export type Variant = 'head' | 'body' | 'footer';
+export type Variant = 'head' | 'body' | 'foot';
 
-interface ITableCell extends TableCellBaseProps {
+interface TableCellProps extends TableCellBaseProps {
   className?: string;
   children: React.ReactNode;
   component?: React.ElementType<TableCellBaseProps>;
@@ -14,9 +14,9 @@ interface ITableCell extends TableCellBaseProps {
 }
 
 const styles = {
-  head: 'text-primary font-semibold text-xs border-t border-t-secondary',
+  head: 'text-primary font-semibold text-xs border-t border-t-head',
   body: 'text-secondary text-sm',
-  footer: '',
+  foot: 'text-xs text-secondary font-medium',
 };
 
 const TableCell = ({
@@ -25,14 +25,15 @@ const TableCell = ({
   component = 'td',
   variant: propsVariant,
   ...otherProps
-}: ITableCell) => {
-  let variant: Variant = propsVariant || component === 'th' ? 'head' : 'body';
+}: TableCellProps) => {
+  const variant: Variant =
+    propsVariant || (component === 'th' ? 'head' : 'body');
 
   return React.createElement(
     component,
     {
       className: clsx(
-        'border-primary border-b px-1.5 py-2 text-left',
+        'border-table border-b px-1.5 py-2 text-left',
         styles[variant],
         className
       ),

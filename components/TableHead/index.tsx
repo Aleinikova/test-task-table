@@ -1,9 +1,9 @@
-interface ITableRow extends React.HTMLAttributes<HTMLTableSectionElement> {
+interface TableHeadProps extends React.HTMLAttributes<HTMLTableSectionElement> {
   className?: string;
   children: React.ReactNode;
 }
 
-const TableHead = ({ className, children, ...otherProps }: ITableRow) => {
+const TableHead = ({ className, children, ...otherProps }: TableHeadProps) => {
   return (
     <thead className={className} {...otherProps}>
       {children}
