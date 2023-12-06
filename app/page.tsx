@@ -6,6 +6,8 @@ import {
   getCoreRowModel,
   useReactTable,
 } from '@tanstack/react-table';
+import { useQuery } from '@tanstack/react-query';
+
 import Table from '@/components/Table';
 import TableHead from '@/components/TableHead';
 import TableRow from '@/components/TableRow';
@@ -14,7 +16,7 @@ import TableBody from '@/components/TableBody';
 import TableFoot from '@/components/TableFoot';
 import RequestStatus from '@/components/RequestStatus';
 import Button from '@/components/Button';
-import { useQuery } from '@tanstack/react-query';
+
 import Loader from '@/components/Loader';
 
 type Request = {

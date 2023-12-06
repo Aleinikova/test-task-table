@@ -1,7 +1,7 @@
-import React from 'react';
+import React, { RefObject } from 'react';
 import clsx from 'clsx';
 
-export type TableCellBaseProps = React.ThHTMLAttributes<HTMLTableCellElement> &
+export type TableCellBaseProps = React.HTMLAttributes<HTMLTableCellElement> &
   React.TdHTMLAttributes<HTMLTableCellElement>;
 
 export type Variant = 'head' | 'body' | 'foot';
@@ -19,13 +19,19 @@ const styles = {
   foot: 'text-xs text-secondary font-medium',
 };
 
-const TableCell = ({
-  className,
-  children,
-  component = 'td',
-  variant: propsVariant,
-  ...otherProps
-}: TableCellProps) => {
+const TableCell = React.forwardRef<
+  HTMLTableCellElement,
+  TableCellProps & { ref?: RefObject<HTMLTableCellElement> }
+>(function TableCell(
+  {
+    className,
+    children,
+    component = 'td',
+    variant: propsVariant,
+    ...otherProps
+  },
+  ref
+) {
   const variant: Variant =
     propsVariant || (component === 'th' ? 'head' : 'body');
 
@@ -37,10 +43,11 @@ const TableCell = ({
         styles[variant],
         className
       ),
+      ref,
       ...otherProps,
     },
     children
   );
-};
+});
 
 export default TableCell;
